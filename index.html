@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CYBER_SECURITY_CORE_ULTRA</title>
+    <style>
+        body { background-color: #000; color: #0f0; font-family: 'Courier New', monospace; margin: 0; padding: 20px; }
+        .container { border: 2px solid #0f0; padding: 20px; max-width: 500px; margin: auto; box-shadow: 0 0 15px #0f0; border-radius: 10px; }
+        h2 { text-align: center; color: #0f0; text-transform: uppercase; letter-spacing: 2px; }
+        input { width: 90%; padding: 12px; background: #111; color: #0f0; border: 1px solid #0f0; margin-bottom: 20px; display: block; margin: 0 auto 20px auto; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        button { background: #000; color: #0f0; border: 1px solid #0f0; padding: 10px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #0f0; color: #000; }
+        #output { margin-top: 20px; padding: 20px; border: 1px dashed #0f0; text-align: center; font-size: 16px; min-height: 120px; }
+        .alert-red { color: #f00; animation: blink 0.5s infinite; }
+        .safe-green { color: #0f0; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>CORE_SECURITY_HUB</h2>
+    <input type="text" id="target" placeholder="ENTER_TARGET_DATA_HERE">
+
+    <div class="grid">
+        <button onclick="check('PHISHING')">PHISHING_SCAN</button>
+        <button onclick="check('APK_VIRUS')">APK_VIRUS_SCAN</button>
+        <button onclick="check('GMAIL')">GMAIL_VALIDATOR</button>
+        <button onclick="check('FB_CHECK')">FB_LOGIN_TEST</button>
+        <button onclick="check('PORT_SCAN')">PORT_SCAN</button>
+        <button onclick="check('WIFI_SEC')">WIFI_CHECK</button>
+    </div>
+
+    <div id="output">SYSTEM_READY... AWAITING_COMMAND...</div>
+</div>
+
+<script>
+function check(mode) {
+    const val = document.getElementById('target').value;
+    const out = document.getElementById('output');
+    
+    if(!val) { out.innerHTML = "ERROR: INPUT_REQUIRED"; return; }
+
+    const tips = [
+        "TIP: ALWAYS ENABLE 2FA ON YOUR ACCOUNTS.",
+        "TIP: AVOID CLICKING SUSPICIOUS LINKS IN EMAILS.",
+        "TIP: KEEP APPS UPDATED TO PATCH VULNERABILITIES.",
+        "TIP: USE STRONG PASSWORDS FOR EVERY ACCOUNT.",
+        "TIP: NEVER DOWNLOAD APKS FROM UNTRUSTED SOURCES."
+    ];
+    const randomTip = tips[Math.floor(Math.random() * tips.length)];
+
+    out.innerHTML = "INITIALIZING " + mode + "..." + "<br>" + "ANALYZING DATA...";
+    
+    setTimeout(() => {
+        let result = "";
+        let isDanger = false;
+
+        const dangerKeywords = ["hack", "phish", "virus", "malware", "steal", "crack"];
+        isDanger = dangerKeywords.some(w => val.toLowerCase().includes(w));
+
+        if(isDanger) {
+            result = "[!] ALERT: THREAT DETECTED!" + "<br>" + "ACTION: BLOCK CONNECTION.";
+            out.className = "alert-red";
+        } else {
+            result = "[+] SYSTEM STATUS: SAFE." + "<br>" + "RESULT: NO THREATS FOUND.";
+            out.className = "safe-green";
+        }
+
+        out.innerHTML = result + "<br><br>" + "<small style='color:grey'>" + randomTip + "</small>" + "<br>" + "<small style='color:white'>PRIVACY: DATA KEPT LOCAL</small>";
+    }, 2000);
+}
+</script>
+
+</body>
+</html>
